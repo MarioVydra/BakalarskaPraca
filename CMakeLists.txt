@@ -3,4 +3,8 @@ project(BakalarskaPraca)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(BakalarskaPraca main.cpp)
+add_executable(BakalarskaPraca main.cpp
+        Matrix.h
+        FileHandler.h
+        Algorithms.h
+)

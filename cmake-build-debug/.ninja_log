@@ -1,0 +1,9 @@
+# ninja log v5
+3	1512	7298729147446483	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
+1513	1638	7298729148696516	BakalarskaPraca.exe	9943b77619f88d3f
+3	1113	7297170842226319	CMakeFiles/BakalarskaPraca.dir/Algorithms.cpp.obj	1bd4721d364f2ac7
+1	130	7297880386270075	build.ninja	b6279086bb781d57
+2	1592	7298740585771186	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
+1592	1830	7298740588141145	BakalarskaPraca.exe	9943b77619f88d3f
+3	1593	7298860099569792	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
+1593	1746	7298860101079794	BakalarskaPraca.exe	9943b77619f88d3f

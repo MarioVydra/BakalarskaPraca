@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "BakalarskaPraca::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-BakalarskaPraca-Debug-1d5680210f219d7e5e6b.json",
+					"jsonFile" : "target-BakalarskaPraca-Debug-a6649741979e8dfa9add.json",
 					"name" : "BakalarskaPraca",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "E:/\u0160kola/BakalarskaPraca/cmake-build-debug",
-		"source" : "E:/\u0160kola/BakalarskaPraca"
+		"build" : "E:/Skola/BakalarskaPraca/cmake-build-debug",
+		"source" : "E:/Skola/BakalarskaPraca"
 	},
 	"version" : 
 	{
