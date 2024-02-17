@@ -78,6 +78,7 @@ public:
 
     template<typename T>
     void leibnizMethod(Matrix<T>& matrix) {
+        T result = 1;
         auto start = getCurrentTime();
 
         auto end = getCurrentTime();
