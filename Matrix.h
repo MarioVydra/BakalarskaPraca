@@ -4,23 +4,46 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include "Generator.h"
 
 template<class T>
 class Matrix {
 private:
-    std::vector<std::vector<T>> matrix_;
     int size_;
+    T** matrix_;
 public:
     Matrix(int size) : size_(size) {
+        matrix_ = new T*[size_];
         for (int i = 0; i < size_; ++i) {
-            std::vector<T> row(size_);
-            matrix_.push_back(row);
+            matrix_[i] = new T[size_];
+        }
+
+        for (int i = 0; i < size_; ++i) {
+            for (int j = 0; j < size_; ++j) {
+                matrix_[i][j] = 0;
+            }
         }
     };
+
+    ~Matrix() {
+        for (int i = 0; i < size_; ++i) {
+            delete[] matrix_[i];
+        }
+        delete[] matrix_;
+    }
 
     void setValue(int row, int column, T value) {
         matrix_[row][column] = value;
     };
+
+    template<typename G>
+    void generateValues(Generator<G>& generator) {
+        for (int i = 0; i < size_; ++i) {
+            for (int j = 0; j < size_; ++j) {
+                matrix_[i][j] = generator.generate();
+            }
+        }
+    }
 
     void print() {
         for (int i = 0; i < size_; ++i) {
@@ -36,9 +59,9 @@ public:
         return size_;
     };
 
-    std::vector<T>& operator[](int index) {
+   T*& operator[](int index) {
         return matrix_[index];
-    }
+   }
 };
 
 #endif
