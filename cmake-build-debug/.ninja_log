@@ -1,24 +1,5 @@
 # ninja log v5
-3	1572	7307340115076448	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1573	1694	7307340116286421	BakalarskaPraca.exe	9943b77619f88d3f
+3	1690	7307549083736061	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
+1691	1839	7307549085206065	BakalarskaPraca.exe	9943b77619f88d3f
 3	1113	7297170842226319	CMakeFiles/BakalarskaPraca.dir/Algorithms.cpp.obj	1bd4721d364f2ac7
-1	138	7307410585373587	build.ninja	b6279086bb781d57
-1	170	7307410585373587	build.ninja	b6279086bb781d57
-3	1861	7307410604753607	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1861	2106	7307410607193597	BakalarskaPraca.exe	9943b77619f88d3f
-3	1765	7307412306423575	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1765	1897	7307412307733588	BakalarskaPraca.exe	9943b77619f88d3f
-2	1822	7307415963212430	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1822	1978	7307415964772421	BakalarskaPraca.exe	9943b77619f88d3f
-4	1805	7307420222648034	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1805	1956	7307420224148031	BakalarskaPraca.exe	9943b77619f88d3f
-4	1854	7307436414032924	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1855	2005	7307436415532905	BakalarskaPraca.exe	9943b77619f88d3f
-2	1800	7307510567675659	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1800	1960	7307510569275651	BakalarskaPraca.exe	9943b77619f88d3f
-2	1803	7307511455695643	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1803	1946	7307511457105645	BakalarskaPraca.exe	9943b77619f88d3f
-3	1816	7307513686865657	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1816	1973	7307513688425639	BakalarskaPraca.exe	9943b77619f88d3f
-3	1865	7307515976281112	CMakeFiles/BakalarskaPraca.dir/main.cpp.obj	688bdcecadc3e374
-1866	2020	7307515977811093	BakalarskaPraca.exe	9943b77619f88d3f
+1	170	7308162949927459	build.ninja	b6279086bb781d57

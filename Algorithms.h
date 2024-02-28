@@ -60,7 +60,7 @@ public:
         std::chrono::duration<double> elapsedTime = end - start;
 
         if (characterOutput) {
-            std::cout << "The determinant of the matrix is equal to: " << std::setprecision(std::numeric_limits<double>::max_digits10) << result << std::endl;
+            std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
             std::cout << "Calculation duration of the Gauss Elimination: " << elapsedTime << std::endl;
         }
         return elapsedTime;

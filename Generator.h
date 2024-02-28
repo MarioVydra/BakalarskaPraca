@@ -20,12 +20,12 @@ public:
     }
 
     T generate() {
-        double randomNumber = numberDistribution_(numberGenerator_);
         double probabilityOfZero = zeroDistribution_(zeroGenerator_);
 
         if (probabilityOfZero < zeroProbability_) {
             return 0.0;
         }
+        double randomNumber = numberDistribution_(numberGenerator_);
         return randomNumber;
     }
 };
@@ -46,12 +46,12 @@ public:
     }
 
     int generate() {
-        int randomNumber = numberDistribution_(numberGenerator_);
         double probabilityOfZero = zeroDistribution_(zeroGenerator_);
 
         if (probabilityOfZero < zeroProbability_) {
             return 0.0;
         }
+        int randomNumber = numberDistribution_(numberGenerator_);
         return randomNumber;
     }
 };
