@@ -55,6 +55,18 @@ public:
         std::cout << std::endl;
     };
 
+    int countZeros() {
+        int zeros = 0;
+        for (int i = 0; i < size_; ++i) {
+            for (int j = 0; j < size_; ++j) {
+                if (matrix_[i][j] == 0) {
+                    zeros++;
+                }
+            }
+        }
+        return zeros;
+    };
+
     int getSize() {
         return size_;
     };

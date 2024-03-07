@@ -50,14 +50,16 @@ private:
         int matrixSize = 10;
         FileWriter fileWriter("experiment" + std::to_string(method));
         Algorithms alg = Algorithms<T>();
+        fileWriter.writeToFile(std::to_string(generator.getSeed()) + "\n");
         while (matrixSize < 101) {
             fileWriter.writeToFile(std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + ": ");
             for (int i = 0; i < 100; ++i) {
                 Matrix<T> matrix(matrixSize);
                 matrix.generateValues(generator);
+                //std::cout << matrix.countZeros() << " ";
                 std::chrono::duration<double> time{};
                 switch (method) {
-                    case 1: time = alg.gaussEliminationMethod(matrix, true); break;
+                    case 1: time = alg.gaussEliminationMethod(matrix, false); break;
                     case 2: time = alg.leibnizMethod(matrix, false); break;
                     case 3: time = alg.laplaceMethod(matrix, laplaceVariant::FULL_LAPLACE_EXPANSION, false); break;
                     case 4: time = alg.laplaceMethod(matrix, laplaceVariant::LAPLACE_RULE_OF_SARRUS, false); break;
@@ -67,7 +69,9 @@ private:
                 fileWriter.writeToFile(std::to_string(time.count()) + " ");
             }
             fileWriter.writeToFile("\n");
+            std::cout << "\n";
             matrixSize++;
+
         }
     }
 

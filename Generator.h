@@ -28,6 +28,10 @@ public:
         double randomNumber = numberDistribution_(numberGenerator_);
         return randomNumber;
     }
+
+    unsigned int getSeed() {
+        return seed_;
+    }
 };
 
 template<>
@@ -53,6 +57,10 @@ public:
         }
         int randomNumber = numberDistribution_(numberGenerator_);
         return randomNumber;
+    }
+
+    unsigned int getSeed() {
+        return seed_;
     }
 };
 

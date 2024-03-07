@@ -21,7 +21,7 @@ public:
         T pivot;
         T result = 1;
         T number;
-        T delta = 1e-10;
+        T delta = std::numeric_limits<T>::min();
 
         for (int i = 0; i < matrixSize; ++i) {
             pivot = 0;
@@ -51,6 +51,7 @@ public:
                     }
                 }
             }
+            matrix.print();
         }
 
         for (int i = 0; i < pivots.size(); ++i) {
@@ -125,18 +126,6 @@ public:
         Matrix<T> U(matrixSize);
         std::vector<T> diagonalElements;
         T sum;
-
-        for (int i = 0; i < matrixSize; ++i) {
-            for (int j = i; j < matrixSize; ++j) {
-                if (matrix[j][i] != 0) {
-                    if (j != i) {
-                        std::swap(matrix[i], matrix[j]);
-                    }
-                    break;
-                }
-            }
-        }
-        matrix.print();
 
         for (int i = 0; i < matrixSize; ++i) {
 
