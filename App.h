@@ -48,16 +48,28 @@ private:
     template<typename T, typename G>
     void replications(int method, Generator<G>& generator) {
         int matrixSize = 10;
+        double time;
+        double sumTime;
+        double sumTimeSquared;
+        double avgTime;
+        double standardDeviation;
+        double halfWidth;
+        double lowerLimit;
+        double upperLimit;
+
         FileWriter fileWriter("experiment" + std::to_string(method));
         Algorithms alg = Algorithms<T>();
-        fileWriter.writeToFile(std::to_string(generator.getSeed()) + "\n");
+        fileWriter.writeStringToFile(std::to_string(generator.getSeed()) + "\n");
+
         while (matrixSize < 101) {
-            fileWriter.writeToFile(std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + ": ");
+            fileWriter.writeStringToFile(std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + ": ");
+            sumTime = 0;
+            sumTimeSquared = 0;
+
             for (int i = 0; i < 100; ++i) {
                 Matrix<T> matrix(matrixSize);
                 matrix.generateValues(generator);
                 //std::cout << matrix.countZeros() << " ";
-                std::chrono::duration<double> time{};
                 switch (method) {
                     case 1: time = alg.gaussEliminationMethod(matrix, false); break;
                     case 2: time = alg.leibnizMethod(matrix, false); break;
@@ -66,12 +78,25 @@ private:
                     case 5: time = alg.luDecomposition(matrix, false); break;
                     default: time = alg.gaussEliminationMethod(matrix, false); break;
                 }
-                fileWriter.writeToFile(std::to_string(time.count()) + " ");
+                sumTimeSquared += std::pow(time, 2);
+                sumTime += time;
+                fileWriter.writeDoubleToFile(time);
+                fileWriter.writeStringToFile(" ");
             }
-            fileWriter.writeToFile("\n");
-            std::cout << "\n";
-            matrixSize++;
+            avgTime = sumTime / 100;
+            standardDeviation = std::sqrt((sumTimeSquared - (std::pow(sumTime, 2) / 100)) / (100 - 1));
+            halfWidth = (standardDeviation * 1.96) / std::sqrt(100);
+            lowerLimit = avgTime - halfWidth;
+            upperLimit = avgTime + halfWidth;
 
+            fileWriter.writeStringToFile("\nAverage time of " + std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + " matrix: ");
+            fileWriter.writeDoubleToFile(avgTime);
+            fileWriter.writeStringToFile("\n95% Confidence interval of " + std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + " matrix: <");
+            fileWriter.writeDoubleToFile(lowerLimit);
+            fileWriter.writeStringToFile(",");
+            fileWriter.writeDoubleToFile(upperLimit);
+            fileWriter.writeStringToFile(">\n\n");
+            matrixSize++;
         }
     }
 

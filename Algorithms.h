@@ -14,7 +14,7 @@ public:
         return std::chrono::system_clock::now();
     }
 
-    std::chrono::duration<double> gaussEliminationMethod(Matrix<T>& matrix, bool characterOutput) {
+    double gaussEliminationMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         std::vector<T> pivots;
         int matrixSize = matrix.getSize();
@@ -24,6 +24,7 @@ public:
         T delta = std::numeric_limits<T>::min();
 
         for (int i = 0; i < matrixSize; ++i) {
+            //matrix.print();
             pivot = 0;
             for (int j = i; j < matrixSize; ++j) {
                 if (matrix[j][i] != 0) {
@@ -46,12 +47,11 @@ public:
                 number = -matrix[j][i];
                 for (int k = i; k < matrixSize; ++k) {
                     matrix[j][k] += matrix[i][k] * (number / pivot);
-                    if ((matrix[j][k] < delta && matrix[j][k] > 0) || (matrix[j][k] > -delta && matrix[j][k] < 0)) {
+                    if (matrix[j][k] < delta && matrix[j][k] > -delta) {
                         matrix[j][k] = 0;
                     }
                 }
             }
-            matrix.print();
         }
 
         for (int i = 0; i < pivots.size(); ++i) {
@@ -64,10 +64,10 @@ public:
             std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
             std::cout << "Calculation duration of the Gauss Elimination: " << elapsedTime << std::endl;
         }
-        return elapsedTime;
+        return elapsedTime.count();
     }
 
-    std::chrono::duration<double> leibnizMethod(Matrix<T>& matrix, bool characterOutput) {
+    double leibnizMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         T result = 0;
         int numberOfSwaps;
@@ -105,7 +105,7 @@ public:
             std::cout << "The determinant of the matrix is equal to: " << std::setprecision(std::numeric_limits<double>::max_digits10) << result << std::endl;
             std::cout << "Calculation duration of the Leibniz method: " << elapsedTime << std::endl;
         }
-        return elapsedTime;
+        return elapsedTime.count();
     }
 
     T ruleOfSarrus(Matrix<T>& matrix) {
@@ -118,7 +118,7 @@ public:
         return result;
     }
 
-    std::chrono::duration<double> luDecomposition(Matrix<T>& matrix, bool characterOutput) {
+    double luDecomposition(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         int matrixSize = matrix.getSize();
         T result = 1;
@@ -168,10 +168,10 @@ public:
             std::cout << "Calculation duration of the LU Decomposition: " << elapsedTime << std::endl;
         }
 
-        return elapsedTime;
+        return elapsedTime.count();
     }
 
-    std::chrono::duration<double> laplaceMethod(Matrix<T>& matrix, laplaceVariant variant, bool characterOutput) {
+    double laplaceMethod(Matrix<T>& matrix, laplaceVariant variant, bool characterOutput) {
         auto start = getCurrentTime();
         T result = laplaceExpansion(matrix, variant);
         auto end = getCurrentTime();
@@ -185,7 +185,7 @@ public:
                 default: std::cerr << "Invalid variant of the Laplace Expansion." << std::endl; break;
             }
         }
-        return elapsedTime;
+        return elapsedTime.count();
     }
 
     T laplaceExpansion(Matrix<T>& matrix, laplaceVariant variant) {

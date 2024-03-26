@@ -11,16 +11,26 @@ private:
     std::ofstream outputFile_;
 public:
     FileWriter(const std::string& fileName) : fileName_(fileName) {
-        outputFile_ = std::ofstream(fileName_, std::ios::app);
+        outputFile_ = std::ofstream(fileName_);
     };
 
-    bool writeToFile(const std::string& data) {
+    bool writeStringToFile(const std::string& data) {
         if (!outputFile_.is_open()) {
             std::cerr << "Unable to open the file: " << fileName_ << std::endl;
             return false;
         }
 
         outputFile_ << data;
+        return true;
+    }
+
+    bool writeDoubleToFile(const double& data) {
+        if (!outputFile_.is_open()) {
+            std::cerr << "Unable to open the file: " << fileName_ << std::endl;
+            return false;
+        }
+
+        outputFile_ << std::setprecision(std::numeric_limits<double>::max_digits10) << data;
         return true;
     }
 };
