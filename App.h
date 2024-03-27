@@ -25,28 +25,36 @@ public:
 
 private:
     void experiment(unsigned int seed) {
-        int method = readIntInput("Choose a method for calculating the determinant [ '1' - Gauss Elimination, '2' - Leibniz Method, "
-                                  "'3' - Full Laplace Expansion, '4' - Laplace Expansion + Rule of Sarrus, '5' - LU Decomposition ].", 1, 5);
+        int method = readIntInput("Choose a method for experiment [ '1' - Gauss Elimination, '2' - Leibniz Method, "
+                                  "'3' - Full Laplace Expansion, '4' - Laplace Expansion + Rule of Sarrus, '5' - LU Decomposition, '6' - Exit ].", 1, 6);
+        if (method == 6) {
+            return;
+        }
+        int numberOfReplications = readIntInput("Enter number of replications [1-10000].", 1, 10000);
+        int seedSet = readIntInput("Do you want to set the seed? ['0' - no, '1' - yes].", 0, 1);
+        if (seedSet == 1) {
+            seed = readUnsignedIntInput("Enter the seed for the generator.", 0, std::numeric_limits<unsigned int>::max());
+        }
         int minValue = readIntInput("Enter minimum integer for the generator.", std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
         int maxValue = readIntInput("Enter maximum integer for the generator.", std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
-        double zeroProbability = readZeroProbability("Enter probability of zero elements in the matrix [0.0-1.0]");
+        double zeroProbability = readZeroProbability("Enter probability of zero elements in the matrix [0.0-1.0].");
         int dataType = readIntInput("Choose data type for generated elements [ '1' - double, '2' - float, '3' - int ]", 1, 3);
 
         if (dataType == 1) {
             Generator<double> generator(minValue, maxValue, zeroProbability, seed);
-            replications<double, double>(method, generator);
+            replications<double, double>(method, generator, numberOfReplications);
 
         } else if (dataType == 2) {
             Generator<float> generator(minValue, maxValue, zeroProbability, seed);
-            replications<float, float>(method, generator);
+            replications<float, float>(method, generator, numberOfReplications);
         } else {
             Generator<int> generator(minValue, maxValue, zeroProbability, seed);
-            replications<double, int>(method, generator);
+            replications<double, int>(method, generator, numberOfReplications);
         }
     }
 
     template<typename T, typename G>
-    void replications(int method, Generator<G>& generator) {
+    void replications(int method, Generator<G>& generator, int numberOfReplications) {
         int matrixSize = 10;
         double time;
         double sumTime;
@@ -66,7 +74,7 @@ private:
             sumTime = 0;
             sumTimeSquared = 0;
 
-            for (int i = 0; i < 100; ++i) {
+            for (int i = 0; i < numberOfReplications; ++i) {
                 Matrix<T> matrix(matrixSize);
                 matrix.generateValues(generator);
                 //std::cout << matrix.countZeros() << " ";
@@ -83,8 +91,8 @@ private:
                 fileWriter.writeDoubleToFile(time);
                 fileWriter.writeStringToFile(" ");
             }
-            avgTime = sumTime / 100;
-            standardDeviation = std::sqrt((sumTimeSquared - (std::pow(sumTime, 2) / 100)) / (100 - 1));
+            avgTime = sumTime / numberOfReplications;
+            standardDeviation = std::sqrt((sumTimeSquared - (std::pow(sumTime, 2) / numberOfReplications)) / (numberOfReplications - 1));
             halfWidth = (standardDeviation * 1.96) / std::sqrt(100);
             lowerLimit = avgTime - halfWidth;
             upperLimit = avgTime + halfWidth;
@@ -103,9 +111,12 @@ private:
     void calculateMatrixFromFile() {
         std::string dataType;
         int size;
-        std::string fileName = readFileNameInput("Enter the name of the file in the .txt format:");
         int method = readIntInput("Choose a method for calculating the determinant [ '1' - Gauss Elimination, '2' - Leibniz Method, "
-                                  "'3' - Full Laplace Expansion, '4' - Laplace Expansion + Rule of Sarrus, '5' - LU Decomposition ].", 1, 5);
+                                  "'3' - Full Laplace Expansion, '4' - Laplace Expansion + Rule of Sarrus, '5' - LU Decomposition, '6' - Exit ].", 1, 6);
+        if (method == 6) {
+            return;
+        }
+        std::string fileName = readFileNameInput("Enter the name of the file in the .txt format:");
         FileReader fileReader(fileName);
         fileReader.readInitializationInfo(size, dataType);
 
@@ -138,6 +149,17 @@ private:
 
     static int readIntInput(const std::string& prompt, int minValue, int maxValue) {
         int input;
+        std::cout << prompt << std::endl;
+        while (!(std::cin >> input) || (input < minValue || input > maxValue)) {
+            std::cout << "Invalid input. Please enter valid number: [" << minValue << "-" << maxValue << "]." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        return input;
+    }
+
+    static unsigned int readUnsignedIntInput(const std::string& prompt, unsigned int minValue, unsigned int maxValue) {
+        unsigned int input;
         std::cout << prompt << std::endl;
         while (!(std::cin >> input) || (input < minValue || input > maxValue)) {
             std::cout << "Invalid input. Please enter valid number: [" << minValue << "-" << maxValue << "]." << std::endl;
