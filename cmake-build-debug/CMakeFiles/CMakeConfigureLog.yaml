@@ -109,8 +109,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gg91px"
-      binary: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gg91px"
+      source: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wvbf2t"
+      binary: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wvbf2t"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
@@ -119,28 +119,28 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gg91px'
+        Change Dir: 'E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wvbf2t'
         
-        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_c277a\\fast
-        	"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_c277a.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_c277a.dir\\build
-        Building C object CMakeFiles/cmTC_c277a.dir/CMakeCCompilerABI.c.obj
-        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_c277a.dir\\CMakeCCompilerABI.c.obj.d --working-dir=E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-gg91px --filter-prefix="Note: including file: " -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm9BA2.tmp
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_734cf\\fast
+        	"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_734cf.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_734cf.dir\\build
+        Building C object CMakeFiles/cmTC_734cf.dir/CMakeCCompilerABI.c.obj
+        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_734cf.dir\\CMakeCCompilerABI.c.obj.d --working-dir=E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-wvbf2t --filter-prefix="Note: including file: " -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm3765.tmp
         CMakeCCompilerABI.c
-        Linking C executable cmTC_c277a.exe
-        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_c277a.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_c277a.dir\\objects1.rsp @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm9C11.tmp
+        Linking C executable cmTC_734cf.exe
+        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_734cf.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_734cf.dir\\objects1.rsp @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm38FD.tmp
         Visual Studio Incremental Link with embedded manifests
-        Create CMakeFiles\\cmTC_c277a.dir/manifest.rc
-        Create empty: CMakeFiles\\cmTC_c277a.dir/embed.manifest
+        Create CMakeFiles\\cmTC_734cf.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_734cf.dir/embed.manifest
         RC Pass 1:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_c277a.dir/manifest.res CMakeFiles\\cmTC_c277a.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_734cf.dir/manifest.res CMakeFiles\\cmTC_734cf.dir/manifest.rc
         LINK Pass 1:
-        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_c277a.dir\\objects1.rsp /out:cmTC_c277a.exe /implib:cmTC_c277a.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-gg91px\\cmTC_c277a.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_c277a.dir/intermediate.manifest CMakeFiles\\cmTC_c277a.dir/manifest.res
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_734cf.dir\\objects1.rsp /out:cmTC_734cf.exe /implib:cmTC_734cf.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-wvbf2t\\cmTC_734cf.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_734cf.dir/intermediate.manifest CMakeFiles\\cmTC_734cf.dir/manifest.res
         MT:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_c277a.dir/intermediate.manifest /out:CMakeFiles\\cmTC_c277a.dir/embed.manifest /notify_update
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_734cf.dir/intermediate.manifest /out:CMakeFiles\\cmTC_734cf.dir/embed.manifest /notify_update
         RC Pass 2:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_c277a.dir/manifest.res CMakeFiles\\cmTC_c277a.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_734cf.dir/manifest.res CMakeFiles\\cmTC_734cf.dir/manifest.rc
         FINAL LINK:
-        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_c277a.dir\\objects1.rsp /out:cmTC_c277a.exe /implib:cmTC_c277a.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-gg91px\\cmTC_c277a.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_c277a.dir/intermediate.manifest CMakeFiles\\cmTC_c277a.dir/manifest.res
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_734cf.dir\\objects1.rsp /out:cmTC_734cf.exe /implib:cmTC_734cf.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-wvbf2t\\cmTC_734cf.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_734cf.dir/intermediate.manifest CMakeFiles\\cmTC_734cf.dir/manifest.res
         
       exitCode: 0
   -
@@ -152,8 +152,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vvl80i"
-      binary: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vvl80i"
+      source: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-b8wv34"
+      binary: "E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-b8wv34"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
@@ -162,28 +162,28 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vvl80i'
+        Change Dir: 'E:/Skola/BakalarskaPraca/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-b8wv34'
         
-        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_201f3\\fast
-        	"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_201f3.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_201f3.dir\\build
-        Building CXX object CMakeFiles/cmTC_201f3.dir/CMakeCXXCompilerABI.cpp.obj
-        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_201f3.dir\\CMakeCXXCompilerABI.cpp.obj.d --working-dir=E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-vvl80i --filter-prefix="Note: including file: " -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm9E81.tmp
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_7c987\\fast
+        	"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_7c987.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_7c987.dir\\build
+        Building CXX object CMakeFiles/cmTC_7c987.dir/CMakeCXXCompilerABI.cpp.obj
+        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_7c987.dir\\CMakeCXXCompilerABI.cpp.obj.d --working-dir=E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-b8wv34 --filter-prefix="Note: including file: " -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm3C18.tmp
         CMakeCXXCompilerABI.cpp
-        Linking CXX executable cmTC_201f3.exe
-        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_201f3.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_201f3.dir\\objects1.rsp @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm9EEF.tmp
+        Linking CXX executable cmTC_7c987.exe
+        	"C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_7c987.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_7c987.dir\\objects1.rsp @C:\\Users\\sherl\\AppData\\Local\\Temp\\nm3D61.tmp
         Visual Studio Incremental Link with embedded manifests
-        Create CMakeFiles\\cmTC_201f3.dir/manifest.rc
-        Create empty: CMakeFiles\\cmTC_201f3.dir/embed.manifest
+        Create CMakeFiles\\cmTC_7c987.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_7c987.dir/embed.manifest
         RC Pass 1:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_201f3.dir/manifest.res CMakeFiles\\cmTC_201f3.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_7c987.dir/manifest.res CMakeFiles\\cmTC_7c987.dir/manifest.rc
         LINK Pass 1:
-        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_201f3.dir\\objects1.rsp /out:cmTC_201f3.exe /implib:cmTC_201f3.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-vvl80i\\cmTC_201f3.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_201f3.dir/intermediate.manifest CMakeFiles\\cmTC_201f3.dir/manifest.res
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_7c987.dir\\objects1.rsp /out:cmTC_7c987.exe /implib:cmTC_7c987.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-b8wv34\\cmTC_7c987.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_7c987.dir/intermediate.manifest CMakeFiles\\cmTC_7c987.dir/manifest.res
         MT:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_201f3.dir/intermediate.manifest /out:CMakeFiles\\cmTC_201f3.dir/embed.manifest /notify_update
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_7c987.dir/intermediate.manifest /out:CMakeFiles\\cmTC_7c987.dir/embed.manifest /notify_update
         RC Pass 2:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_201f3.dir/manifest.res CMakeFiles\\cmTC_201f3.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_7c987.dir/manifest.res CMakeFiles\\cmTC_7c987.dir/manifest.rc
         FINAL LINK:
-        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_201f3.dir\\objects1.rsp /out:cmTC_201f3.exe /implib:cmTC_201f3.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-vvl80i\\cmTC_201f3.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_201f3.dir/intermediate.manifest CMakeFiles\\cmTC_201f3.dir/manifest.res
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_7c987.dir\\objects1.rsp /out:cmTC_7c987.exe /implib:cmTC_7c987.lib /pdb:E:\\Skola\\BakalarskaPraca\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-b8wv34\\cmTC_7c987.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_7c987.dir/intermediate.manifest CMakeFiles\\cmTC_7c987.dir/manifest.res
         
       exitCode: 0
 ...

@@ -5,15 +5,47 @@
 #include <cmath>
 #include "Matrix.h"
 
+/**
+ * Enum laplaceVariant, ktorý reprezentuje varianty Laplaceovho rozvoja.
+ */
 enum laplaceVariant { FULL_LAPLACE_EXPANSION, LAPLACE_RULE_OF_SARRUS };
 
+/**
+ * Trieda Algorithms obsahuje jednotlivé algoritmy na výpočet determinantu štvorcových matíc.
+ *
+ * @tparam T dátový typ prvkov matice
+ */
 template<class T>
 class Algorithms {
 public:
+    /**
+     * Getter pre aktuálny systémový čas.
+     *
+     * @return aktuálny systémový čas
+     */
     auto getCurrentTime() {
         return std::chrono::system_clock::now();
     }
 
+    /**
+     * Metóda outputResults slúži na výpis výsledného determinantu matice a čas trvania daného výpočtu.
+     *
+     * @param methodName názov metódy
+     * @param result výsledný determinant
+     * @param elapsedTime výsledný čas trvania výpočtu
+     */
+    void outputResults(const std::string& methodName, T result, auto elapsedTime) {
+        std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
+        std::cout << "Calculation duration of the " << methodName << ": " << elapsedTime << std::endl;
+    }
+
+    /**
+     * Metóda gaussEliminationMethod reprezentuje algoritmus Gaussovej eliminácie na výpočet determinantu štvorcovej matice.
+     *
+     * @param matrix referencia na maticu
+     * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
+     * @return čas trvania výpočtu
+     */
     double gaussEliminationMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         std::vector<T> pivots;
@@ -25,12 +57,14 @@ public:
 
         for (int i = 0; i < matrixSize; ++i) {
             //matrix.print();
+
+            // nájdenie pivota
             pivot = 0;
             for (int j = i; j < matrixSize; ++j) {
                 if (matrix[j][i] != 0) {
                     if (j != i) {
-                        std::swap(matrix[i], matrix[j]);
-                        result *= (-1);
+                        std::swap(matrix[i], matrix[j]);    // výmena riadkov
+                        result *= (-1);                     // zmena znamienka determinantu
                     }
                     pivot = matrix[i][i];
                     pivots.push_back(matrix[i][i]);
@@ -43,10 +77,12 @@ public:
                 break;
             }
 
+            // úprava riadkov pod pivotom
             for (int j = i + 1; j < matrixSize; ++j) {
                 number = -matrix[j][i];
                 for (int k = i; k < matrixSize; ++k) {
                     matrix[j][k] += matrix[i][k] * (number / pivot);
+                    // nastavenie malých hodnôt blízkych nule na 0
                     if (matrix[j][k] < delta && matrix[j][k] > -delta) {
                         matrix[j][k] = 0;
                     }
@@ -54,19 +90,26 @@ public:
             }
         }
 
+        // vynásobenie pivotov
         for (int i = 0; i < pivots.size(); ++i) {
             result *= pivots[i];
         }
         auto end = getCurrentTime();
-        std::chrono::duration<double> elapsedTime = end - start;
+        std::chrono::duration<double> elapsedTime = end - start;       // čas trvania výpočtu v sekundách
 
         if (characterOutput) {
-            std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
-            std::cout << "Calculation duration of the Gauss Elimination: " << elapsedTime << std::endl;
+            outputResults("Gauss Elimination", result, elapsedTime);
         }
         return elapsedTime.count();
     }
 
+    /**
+     * Metóda leibnizMethod reprezentuje algoritmus Leibnitzovej metódy na výpočet determinantu štvorcovej matice.
+     *
+     * @param matrix referencia na maticu
+     * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
+     * @return čas trvania výpočtu
+     */
     double leibnizMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         T result = 0;
@@ -74,6 +117,7 @@ public:
         T product;
         std::vector<int> columns;
 
+        // inicializácia stĺpcových indexov
         for (int i = 0; i < matrix.getSize(); ++i) {
             columns.push_back(i);
         }
@@ -81,9 +125,10 @@ public:
         do {
             product = 1;
             for (int i = 0; i < matrix.getSize(); ++i) {
-                product *= matrix[i][columns[i]];
+                product *= matrix[i][columns[i]];           // vynásobenie prvkov
             }
             numberOfSwaps = 0;
+            // zisteniu počtu výmen potrebných na zoradenie indexov do vzostupného poradia
             for (int i = 0; i < columns.size(); ++i) {
                 for (int j = i + 1; j < columns.size(); ++j) {
                     if (columns[i] > columns[j]) {
@@ -92,22 +137,27 @@ public:
                 }
             }
             if (numberOfSwaps % 2 != 0) {
-                product *= (-1);
+                product *= (-1);        // pri nepárnom počte výmen nastaví znamienko súčinu na záporné
             }
-            result += product;
-        } while (std::next_permutation(columns.begin(), columns.end()));
+            result += product;          // pripočítanie súčinu k výsledku
+        } while (std::next_permutation(columns.begin(), columns.end()));    // pokračuje, dokým existujú ďalšie permutácie stĺpcových indexov
 
         auto end = getCurrentTime();
 
-        std::chrono::duration<double> elapsedTime = end - start;
+        std::chrono::duration<double> elapsedTime = end - start;        // čas trvania výpočtu v sekundách
 
         if (characterOutput) {
-            std::cout << "The determinant of the matrix is equal to: " << std::setprecision(std::numeric_limits<double>::max_digits10) << result << std::endl;
-            std::cout << "Calculation duration of the Leibniz method: " << elapsedTime << std::endl;
+            outputResults("Leibniz method", result, elapsedTime);
         }
         return elapsedTime.count();
     }
 
+    /**
+     * Metóda ruleOfSarrus reprezentuje algoritmus Sarusovho pravidla na výpočet determinantu štvorcovej matice.
+     *
+     * @param matrix referencia na maticu
+     * @return hodnota determinantu
+     */
     T ruleOfSarrus(Matrix<T>& matrix) {
         T result = matrix[0][0] * matrix[1][1] * matrix[2][2]
                  + matrix[0][1] * matrix[1][2] * matrix[2][0]
@@ -118,6 +168,13 @@ public:
         return result;
     }
 
+    /**
+     * Metóda luDecomposition reprezentuje algoritmus LU dekompozície na výpočet determinantu štvorcovej matice.
+     *
+     * @param matrix referencia na maticu
+     * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
+     * @return čas trvania výpočtu
+     */
     double luDecomposition(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         int matrixSize = matrix.getSize();
@@ -128,7 +185,16 @@ public:
         T sum;
 
         for (int i = 0; i < matrixSize; ++i) {
+            for (int j = i; j < matrixSize; ++j) {
+                if (matrix[j][i] != 0) {
+                    std::swap(matrix[i], matrix[j]);
+                    result *= (-1);
+                    break;
+                }
+            }
+        }
 
+        for (int i = 0; i < matrixSize; ++i) {
             for (int j = i; j < matrixSize; ++j) {
                 sum = 0;
                 for (int k = 0; k < matrixSize; ++k) {
@@ -164,30 +230,43 @@ public:
         auto end = getCurrentTime();
         std::chrono::duration<double> elapsedTime = end - start;
         if (characterOutput) {
-            std::cout << "The determinant of the matrix is equal to: " << std::setprecision(std::numeric_limits<double>::max_digits10) << result << std::endl;
-            std::cout << "Calculation duration of the LU Decomposition: " << elapsedTime << std::endl;
+            outputResults("LU Decomposition", result, elapsedTime);
         }
 
         return elapsedTime.count();
     }
 
+    /**
+     * Metóda laplaceMethod slúži na volanie algoritmu Laplaceovho rozvoja a zistenie dĺžky trvania algoritmu Laplaceovho rozvoja.
+     *
+     * @param matrix referencia na maticu
+     * @param variant varianta laplaceovho rozvoja
+     * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
+     * @return čas trvania výpočtu
+     */
     double laplaceMethod(Matrix<T>& matrix, laplaceVariant variant, bool characterOutput) {
         auto start = getCurrentTime();
         T result = laplaceExpansion(matrix, variant);
         auto end = getCurrentTime();
 
-        std::chrono::duration<double> elapsedTime = end - start;
+        std::chrono::duration<double> elapsedTime = end - start;        // čas trvania výpočtu v sekundách
         if (characterOutput) {
-            std::cout << "The determinant of the matrix is equal to: " << std::setprecision(std::numeric_limits<double>::max_digits10) << result << std::endl;
             switch (variant) {
-                case FULL_LAPLACE_EXPANSION: std::cout << "Calculation duration of the Full Laplace expansion: " << elapsedTime << std::endl; break;
-                case LAPLACE_RULE_OF_SARRUS: std::cout << "Calculation duration of the Laplace expansion with Rule of Sarrus: " << elapsedTime << std::endl; break;
+                case FULL_LAPLACE_EXPANSION: outputResults("Full Laplace expansion", result, elapsedTime); break;
+                case LAPLACE_RULE_OF_SARRUS: outputResults("Laplace expansion with Rule of Sarrus", result, elapsedTime); break;
                 default: std::cerr << "Invalid variant of the Laplace Expansion." << std::endl; break;
             }
         }
         return elapsedTime.count();
     }
 
+    /**
+     * Metóda laplaceExpansion reprezentuje algoritmus Laplaceovho rozvoja na výpočet determinantu štvorcovej matice.
+     *
+     * @param matrix referencia na maticu
+     * @param variant varianta laplaceovho rozvoja
+     * @return hodnota determinantu
+     */
     T laplaceExpansion(Matrix<T>& matrix, laplaceVariant variant) {
         int matrixSize = matrix.getSize();
         int newRow;
@@ -199,6 +278,7 @@ public:
         int indexOfRow = 0;
         int indexOfColumn = 0;
 
+        // nájdenie riadku s najväčším počtom núl
         for (int i = 0; i < matrixSize; ++i) {
             int zerosInRow = 0;
             for (int j = 0; j < matrixSize; ++j) {
@@ -212,6 +292,7 @@ public:
             }
         }
 
+        // nájdenie stĺpca s najväčším počtom núl
         for (int j = 0; j < matrixSize; ++j) {
             int zerosInColumn = 0;
             for (int i = 0; i < matrixSize; ++i) {
@@ -225,11 +306,12 @@ public:
             }
         }
 
+        // na základe počtu núl, bude výpočet pokračovať buď podľa riadka alebo podľa stĺpca
         if (maxNumberOfZerosInRow >= maxNumberOfZerosInColumn) {
             for (int i = 0; i < matrixSize; ++i) {
+                // vytvorenie nových matíc (o jeden stupeň menších)
                 Matrix<T> newMatrix(matrixSize - 1);
                 element = matrix[indexOfRow][i];
-
                 newRow = 0;
                 for (int j = 0; j < matrixSize; ++j) {
                     if (j != indexOfRow) {
@@ -243,6 +325,7 @@ public:
                         newRow++;
                     }
                 }
+                // na základe veľkostí nových matíc a variantu laplaceovho rozvoja pokračuje vo výpočte
                 if (newMatrix.getSize() > 1) {
                     if (element != 0) {
                         if (newMatrix.getSize() == 3) {
@@ -261,9 +344,9 @@ public:
             }
         } else {
             for (int i = 0; i < matrixSize; ++i) {
+                // vytvorenie nových matíc (o jeden stupeň menších)
                 Matrix<T> newMatrix(matrixSize - 1);
                 element = matrix[i][indexOfColumn];
-
                 newRow = 0;
                 for (int j = 0; j < matrixSize; ++j) {
                     if (j != i) {
@@ -277,6 +360,7 @@ public:
                         newRow++;
                     }
                 }
+                // na základe veľkostí nových matíc a variantu laplaceovho rozvoja pokračuje vo výpočte
                 if (newMatrix.getSize() > 1) {
                     if (element != 0) {
                         if (newMatrix.getSize() == 4) {
