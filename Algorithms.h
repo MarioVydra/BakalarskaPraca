@@ -184,17 +184,21 @@ public:
         std::vector<T> diagonalElements;
         T sum;
 
+        // usporiadanie riadkov matice, aby na diagonále neboli 0
         for (int i = 0; i < matrixSize; ++i) {
             for (int j = i; j < matrixSize; ++j) {
                 if (matrix[j][i] != 0) {
-                    std::swap(matrix[i], matrix[j]);
-                    result *= (-1);
+                    if (j != i) {
+                        std::swap(matrix[i], matrix[j]);    // výmena riadkov
+                        result *= (-1);                     // zmena znamienka determinantu
+                    }
                     break;
                 }
             }
         }
 
         for (int i = 0; i < matrixSize; ++i) {
+            // výpočet prvkov matice U
             for (int j = i; j < matrixSize; ++j) {
                 sum = 0;
                 for (int k = 0; k < matrixSize; ++k) {
@@ -203,12 +207,14 @@ public:
                 U[i][j] = matrix[i][j] - sum;
             }
 
+            // kontrola, či sa nenachádza na diagonále U nula
             if(U[i][i] == 0) {
                 result = 0;
                 break;
             }
             diagonalElements.push_back(U[i][i]);
 
+            // výpočet prvkov matice L
             for (int j = i; j < matrixSize; ++j) {
                 if (j == i) {
                     L[i][i] = 1;
@@ -220,15 +226,14 @@ public:
                     L[j][i] = (matrix[j][i] - sum) / U[i][i];
                 }
             }
-            L.print();
-            U.print();
         }
 
+        // vynásobenie diagonálnych prvkov matice U
         for (int i = 0; i < diagonalElements.size(); ++i) {
             result *= diagonalElements[i];
         }
         auto end = getCurrentTime();
-        std::chrono::duration<double> elapsedTime = end - start;
+        std::chrono::duration<double> elapsedTime = end - start;        // čas trvania výpočtu v sekundách
         if (characterOutput) {
             outputResults("LU Decomposition", result, elapsedTime);
         }
