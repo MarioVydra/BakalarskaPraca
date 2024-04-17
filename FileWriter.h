@@ -19,7 +19,7 @@ public:
      * @param fileName meno výstupného súboru
      */
     FileWriter(const std::string& fileName) : fileName_(fileName) {
-        outputFile_ = std::ofstream(fileName_);
+        outputFile_ = std::ofstream(fileName_, std::ios_base::app);
     };
 
     /**

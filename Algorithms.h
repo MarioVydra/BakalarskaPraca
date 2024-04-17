@@ -56,8 +56,6 @@ public:
         T delta = std::numeric_limits<T>::min();
 
         for (int i = 0; i < matrixSize; ++i) {
-            //matrix.print();
-
             // nájdenie pivota
             pivot = 0;
             for (int j = i; j < matrixSize; ++j) {
@@ -67,7 +65,7 @@ public:
                         result *= (-1);                     // zmena znamienka determinantu
                     }
                     pivot = matrix[i][i];
-                    pivots.push_back(matrix[i][i]);
+                    pivots.push_back(pivot);
                     break;
                 }
             }
@@ -91,9 +89,12 @@ public:
         }
 
         // vynásobenie pivotov
-        for (int i = 0; i < pivots.size(); ++i) {
-            result *= pivots[i];
+        if (result != 0) {
+            for (int i = 0; i < pivots.size(); ++i) {
+                result *= pivots[i];
+            }
         }
+
         auto end = getCurrentTime();
         std::chrono::duration<double> elapsedTime = end - start;       // čas trvania výpočtu v sekundách
 
@@ -115,6 +116,7 @@ public:
         T result = 0;
         int numberOfSwaps;
         T product;
+        T number;
         std::vector<int> columns;
 
         // inicializácia stĺpcových indexov
@@ -125,20 +127,28 @@ public:
         do {
             product = 1;
             for (int i = 0; i < matrix.getSize(); ++i) {
-                product *= matrix[i][columns[i]];           // vynásobenie prvkov
+                number = matrix[i][columns[i]];
+                if (number == 0) {
+                    product = 0;
+                    break;
+                }
+                product *= number;           // vynásobenie prvkov
             }
-            numberOfSwaps = 0;
             // zisteniu počtu výmen potrebných na zoradenie indexov do vzostupného poradia
-            for (int i = 0; i < columns.size(); ++i) {
-                for (int j = i + 1; j < columns.size(); ++j) {
-                    if (columns[i] > columns[j]) {
-                        numberOfSwaps++;
+            if (product != 0) {
+                numberOfSwaps = 0;
+                for (int i = 0; i < columns.size(); ++i) {
+                    for (int j = i + 1; j < columns.size(); ++j) {
+                        if (columns[i] > columns[j]) {
+                            numberOfSwaps++;
+                        }
                     }
                 }
+                if (numberOfSwaps % 2 != 0) {
+                    product *= (-1);        // pri nepárnom počte výmen nastaví znamienko súčinu na záporné
+                }
             }
-            if (numberOfSwaps % 2 != 0) {
-                product *= (-1);        // pri nepárnom počte výmen nastaví znamienko súčinu na záporné
-            }
+
             result += product;          // pripočítanie súčinu k výsledku
         } while (std::next_permutation(columns.begin(), columns.end()));    // pokračuje, dokým existujú ďalšie permutácie stĺpcových indexov
 
@@ -229,11 +239,14 @@ public:
         }
 
         // vynásobenie diagonálnych prvkov matice U
-        for (int i = 0; i < diagonalElements.size(); ++i) {
-            result *= diagonalElements[i];
+        if (result != 0) {
+            for (int i = 0; i < diagonalElements.size(); ++i) {
+                result *= diagonalElements[i];
+            }
         }
         auto end = getCurrentTime();
         std::chrono::duration<double> elapsedTime = end - start;        // čas trvania výpočtu v sekundách
+
         if (characterOutput) {
             outputResults("LU Decomposition", result, elapsedTime);
         }
@@ -274,6 +287,12 @@ public:
      */
     T laplaceExpansion(Matrix<T>& matrix, laplaceVariant variant) {
         int matrixSize = matrix.getSize();
+
+        // ak je matica veľkosti 3 a varianta je Laplaceov rozvoj s použitím Sarusovho pravidla, tak vráti hodnotu determinantu vypočítanú Sarusovým pravidlom
+        if (matrixSize == 3 && variant == laplaceVariant::LAPLACE_RULE_OF_SARRUS) {
+            return ruleOfSarrus(matrix);
+        }
+
         int newRow;
         int newColumn;
         T result = 0;
@@ -330,21 +349,13 @@ public:
                         newRow++;
                     }
                 }
-                // na základe veľkostí nových matíc a variantu laplaceovho rozvoja pokračuje vo výpočte
+                // na základe veľkostí nových matíc a hodnoty elementu pokračuje vo výpočte
                 if (newMatrix.getSize() > 1) {
                     if (element != 0) {
-                        if (newMatrix.getSize() == 3) {
-                            switch (variant) {
-                                case FULL_LAPLACE_EXPANSION: result += element * pow(-1, indexOfRow + i) * laplaceExpansion(newMatrix, variant); break;
-                                case LAPLACE_RULE_OF_SARRUS: result += element * pow(-1, indexOfRow + i) * ruleOfSarrus(newMatrix); break;
-                                default: std::cerr << "Invalid variant of the Laplace Expansion" << std::endl; return -1;
-                            }
-                        } else {
-                            result += element * pow(-1, indexOfRow + i) * laplaceExpansion(newMatrix, variant);
-                        }
+                        result += element * std::pow(-1, indexOfRow + i) * laplaceExpansion(newMatrix, variant);
                     }
                 } else {
-                    result += element * pow(-1, indexOfRow + i) * newMatrix[0][0];
+                    result += element * std::pow(-1, indexOfRow + i) * newMatrix[0][0];
                 }
             }
         } else {
@@ -365,21 +376,13 @@ public:
                         newRow++;
                     }
                 }
-                // na základe veľkostí nových matíc a variantu laplaceovho rozvoja pokračuje vo výpočte
+                // na základe veľkostí nových matíc a hodnoty elementu pokračuje vo výpočte
                 if (newMatrix.getSize() > 1) {
                     if (element != 0) {
-                        if (newMatrix.getSize() == 4) {
-                            switch (variant) {
-                                case FULL_LAPLACE_EXPANSION: result += element * pow(-1, indexOfColumn + i) * laplaceExpansion(newMatrix, variant); break;
-                                case LAPLACE_RULE_OF_SARRUS: result += element * pow(-1, indexOfColumn + i) * ruleOfSarrus(newMatrix); break;
-                                default: std::cerr << "Invalid variant of the Laplace Expansion" << std::endl; return -1;
-                            }
-                        } else {
-                            result += element * pow(-1, indexOfColumn + i) * laplaceExpansion(newMatrix, variant);
-                        }
+                         result += element * std::pow(-1, indexOfColumn + i) * laplaceExpansion(newMatrix, variant);
                     }
                 } else {
-                    result += element * pow(-1, indexOfColumn + i) * newMatrix[0][0];
+                    result += element * std::pow(-1, indexOfColumn + i) * newMatrix[0][0];
                 }
             }
         }

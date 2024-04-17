@@ -39,6 +39,7 @@ private:
         if (method == 6) {
             return;
         }
+        int maxSizeOfMatrix = readIntInput("Enter the maximum size of the matrix on which you want to perform replications [3-100].", 3, 100);
         int numberOfReplications = readIntInput("Enter the number of the replications [1-10000].", 1, 10000);
         int seedSet = readIntInput("Do you want to set the seed? ['0' - no, '1' - yes].", 0, 1);
         if (seedSet == 1) {
@@ -49,16 +50,36 @@ private:
         double zeroProbability = readZeroProbability("Enter the probability of zero elements in the matrix [0.0-1.0].");
         int dataType = readIntInput("Choose the data type for generated elements [ '1' - double, '2' - float, '3' - int ].", 1, 3);
 
+        std::string fileName = readFileNameInput("Enter the name of the file in the .csv format to save the results:", ".csv");
+        FileWriter fileWriter(fileName);
+        switch (method) {
+            case 1: fileWriter.writeStringToFile("Gauss Elimination\n"); break;
+            case 2: fileWriter.writeStringToFile("Leibniz method\n"); break;
+            case 3: fileWriter.writeStringToFile("Full Laplace Expansion\n"); break;
+            case 4: fileWriter.writeStringToFile("Laplace Expansion + Rule of Sarrus\n"); break;
+            default: fileWriter.writeStringToFile("LU Decomposition\n"); break;
+        }
+        fileWriter.writeStringToFile("Seed;" + std::to_string(seed) + "\n");
+        fileWriter.writeStringToFile("Number of replications for each size of matrix;" + std::to_string(numberOfReplications) + "\n");
+        fileWriter.writeStringToFile("Minimum matrix size;" + std::to_string(3) + ";Maximum matrix size;" + std::to_string(maxSizeOfMatrix) + "\n");
+        fileWriter.writeStringToFile("Zero probability;" + std::to_string(zeroProbability) + "\n");
+        fileWriter.writeStringToFile("Minimum possible generated value;" + std::to_string(minValue) +";Maximum possible generated value;" + std::to_string(maxValue) + "\n");
+        switch (dataType) {
+            case 1: fileWriter.writeStringToFile("Data type of generated values;Double\n"); break;
+            case 2: fileWriter.writeStringToFile("Data type of generated values;Float\n"); break;
+            default: fileWriter.writeStringToFile("Data type of generated values;Int\n"); break;
+        }
+
         if (dataType == 1) {
             Generator<double> generator(minValue, maxValue, zeroProbability, seed);
-            performReplications<double, double>(method, generator, numberOfReplications);
+            performReplications<double, double>(method, generator, numberOfReplications, maxSizeOfMatrix, fileWriter);
 
         } else if (dataType == 2) {
             Generator<float> generator(minValue, maxValue, zeroProbability, seed);
-            performReplications<float, float>(method, generator, numberOfReplications);
+            performReplications<float, float>(method, generator, numberOfReplications, maxSizeOfMatrix, fileWriter);
         } else {
             Generator<int> generator(minValue, maxValue, zeroProbability, seed);
-            performReplications<double, int>(method, generator, numberOfReplications);
+            performReplications<double, int>(method, generator, numberOfReplications, maxSizeOfMatrix, fileWriter);
         }
     }
 
@@ -70,10 +91,12 @@ private:
      * @param method vybraná metóda, s ktorou chceme experimentovať
      * @param generator generátor
      * @param numberOfReplications počet replikácii
+     * @param matrixSizeRange rozsah veľkostí matíc, na ktorých budú vykopnané replikácie
+     * @param fileWriter referencia na zapisovač
      */
     template<typename T, typename G>
-    void performReplications(int method, Generator<G>& generator, int numberOfReplications) {
-        int matrixSize = 10;
+    void performReplications(int method, Generator<G>& generator, int numberOfReplications, int maxSizeOfMatrix, FileWriter& fileWriter) {
+        int matrixSize = 3;
         double time;
         double sumTime;
         double sumTimeSquared;
@@ -87,21 +110,14 @@ private:
         std::vector<double> lowerLimits;
         std::vector<double> upperLimits;
 
-        std::string fileName = readFileNameInput("Enter the name of the file in the .txt format to save the results:");
-        FileWriter fileWriter(fileName);
         Algorithms alg = Algorithms<T>();
-        fileWriter.writeStringToFile("Seed: " + std::to_string(generator.getSeed()) + "\n\n");
 
-        while (matrixSize < 101) {
-            fileWriter.writeStringToFile(std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + ": ");
+        while (matrixSize < maxSizeOfMatrix + 1) {
             sumTime = 0;
             sumTimeSquared = 0;
-
-            std::cout << matrixSize << "x" << matrixSize << ": ";
             for (int i = 0; i < numberOfReplications; ++i) {
                 Matrix<T> matrix(matrixSize);
                 matrix.generateValues(generator);
-                //std::cout << matrix.countZeros() << " ";
                 switch (method) {
                     case 1: time = alg.gaussEliminationMethod(matrix, false); break;
                     case 2: time = alg.leibnizMethod(matrix, false); break;
@@ -112,30 +128,40 @@ private:
                 }
                 sumTimeSquared += std::pow(time, 2);
                 sumTime += time;
-                fileWriter.writeDoubleToFile(time);
-                fileWriter.writeStringToFile(" ");
             }
             avgTime = sumTime / numberOfReplications;
             standardDeviation = std::sqrt((sumTimeSquared - (std::pow(sumTime, 2) / numberOfReplications)) / (numberOfReplications - 1));
-            halfWidth = (standardDeviation * 1.96) / std::sqrt(100);
+            halfWidth = (standardDeviation * 1.96) / std::sqrt(numberOfReplications);
             lowerLimit = avgTime - halfWidth;
             upperLimit = avgTime + halfWidth;
-
-            fileWriter.writeStringToFile("\nAverage time of " + std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + " matrix: ");
-            fileWriter.writeDoubleToFile(avgTime);
-            fileWriter.writeStringToFile("\n95% Confidence interval of " + std::to_string(matrixSize) + "x" + std::to_string(matrixSize) + " matrix: <");
-            fileWriter.writeDoubleToFile(lowerLimit);
-            fileWriter.writeStringToFile(",");
-            fileWriter.writeDoubleToFile(upperLimit);
-            fileWriter.writeStringToFile(">\n\n");
 
             matrixSizes.push_back(matrixSize);
             averageTimes.push_back(avgTime);
             lowerLimits.push_back(lowerLimit);
             upperLimits.push_back(upperLimit);
             matrixSize++;
-            std::cout << std::endl;
         }
+        fileWriter.writeStringToFile("Matrix size;");
+        for (int i = 0; i < matrixSizes.size(); ++i) {
+            fileWriter.writeStringToFile(std::to_string(matrixSizes[i]));
+            fileWriter.writeStringToFile(";");
+        }
+        fileWriter.writeStringToFile("\nAverage time;");
+        for (int i = 0; i < averageTimes.size(); ++i) {
+            fileWriter.writeDoubleToFile(averageTimes[i]);
+            fileWriter.writeStringToFile(";");
+        }
+        fileWriter.writeStringToFile("\n95% Confidence interval (lower limit);");
+        for (int i = 0; i < lowerLimits.size(); ++i) {
+            fileWriter.writeDoubleToFile(lowerLimits[i]);
+            fileWriter.writeStringToFile(";");
+        }
+        fileWriter.writeStringToFile("\n95% Confidence interval (upper limit);");
+        for (int i = 0; i < upperLimits.size(); ++i) {
+            fileWriter.writeDoubleToFile(upperLimits[i]);
+            fileWriter.writeStringToFile(";");
+        }
+        fileWriter.writeStringToFile("\n\n");
     }
 
     /**
@@ -148,7 +174,7 @@ private:
         if (method == 6) {
             return;
         }
-        std::string fileName = readFileNameInput("Enter the name of the file in the .txt format to load the matrix:");
+        std::string fileName = readFileNameInput("Enter the name of the file in the .txt format to load the matrix:", ".txt");
         FileReader fileReader(fileName);
         fileReader.readInitializationInfo(size, dataType);
 
@@ -249,14 +275,15 @@ private:
      * Metóda readFileNameInput slúži na načítanie mena súboru od používateľa.
      *
      * @param prompt výzva na zadanie vstupu
+     * @param fileType žiadaný typ súboru
      * @return načítaný vstup od používateľa
      */
-    static std::string readFileNameInput(const std::string& prompt) {
+    static std::string readFileNameInput(const std::string& prompt, const std::string& fileType) {
         std::string input;
         std::cout << prompt << std::endl;
         // pokiaľ užívateľ nezadá platný vstup
-        while (!(std::cin >> input) || (input.length() < 4 || input.substr(input.length() - 4, input.length()) != ".txt")) {
-            std::cout << "Invalid input. Please enter valid name of the file in the .txt format." << std::endl;
+        while (!(std::cin >> input) || (input.length() < 4 || input.substr(input.length() - 4, input.length()) != fileType)) {
+            std::cout << "Invalid input. Please enter valid name of the file in the " + fileType + " format." << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }

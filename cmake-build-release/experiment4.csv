@@ -1,0 +1,47 @@
+Laplace Expansion + Rule of Sarrus;;;;;;;;
+Seed;3036463056;;;;;;;
+Number of replications for each size of matrix;100;;;;;;;
+Minimum matrix size;3;Maximum matrix size;10;;;;;
+Zero probability;0;;;;;;;
+Minimum possible generated value;-100;Maximum possible generated value;100;;;;;
+Data type of generated values;Double;;;;;;;
+Matrix size;3;4;5;6;7;8;9;10
+Average time;5,20E-08;1,04E-06;1,23E-05;7,55E-05;0,000321783;0,004101676;0,037138323;0,375699586
+95% Confidence interval (lower limit);4,00E-08;9,95E-07;1,18E-05;7,28E-05;0,000318465;0,00409065;0,037052545;0,374965211
+95% Confidence interval (upper limit);6,40E-08;1,08E-06;1,27E-05;7,82E-05;0,000325101;0,004112702;0,037224101;0,376433961
+;;;;;;;;
+Laplace Expansion + Rule of Sarrus;;;;;;;;
+Seed;3036463056;;;;;;;
+Number of replications for each size of matrix;100;;;;;;;
+Minimum matrix size;3;Maximum matrix size;10;;;;;
+Zero probability;0,25;;;;;;;
+Minimum possible generated value;-100;Maximum possible generated value;100;;;;;
+Data type of generated values;Double;;;;;;;
+Matrix size;3;4;5;6;7;8;9;10
+Average time;2,80E-08;1,14E-06;1,00E-05;3,42E-05;8,54E-05;0,000688104;0,004180058;0,028002698
+95% Confidence interval (lower limit);1,68E-08;1,10E-06;9,74E-06;3,04E-05;7,93E-05;0,000634187;0,003872478;0,025268887
+95% Confidence interval (upper limit);3,92E-08;1,18E-06;1,03E-05;3,81E-05;9,15E-05;0,000742021;0,004487638;0,030736509
+;;;;;;;;
+Laplace Expansion + Rule of Sarrus;;;;;;;;
+Seed;3036463056;;;;;;;
+Number of replications for each size of matrix;100;;;;;;;
+Minimum matrix size;3;Maximum matrix size;10;;;;;
+Zero probability;0,5;;;;;;;
+Minimum possible generated value;-100;Maximum possible generated value;100;;;;;
+Data type of generated values;Double;;;;;;;
+Matrix size;3;4;5;6;7;8;9;10
+Average time;2,50E-08;1,14E-06;8,65E-06;1,25E-05;2,96E-05;0,000111097;0,000365818;0,001731337
+95% Confidence interval (lower limit);1,41E-08;1,10E-06;8,34E-06;1,11E-05;2,57E-05;9,62E-05;0,000308731;0,001405428
+95% Confidence interval (upper limit);3,59E-08;1,19E-06;8,96E-06;1,38E-05;3,36E-05;0,000126004;0,000422905;0,002057246
+;;;;;;;;
+Laplace Expansion + Rule of Sarrus;;;;;;;;
+Seed;3036463056;;;;;;;
+Number of replications for each size of matrix;100;;;;;;;
+Minimum matrix size;3;Maximum matrix size;10;;;;;
+Zero probability;0,75;;;;;;;
+Minimum possible generated value;-100;Maximum possible generated value;100;;;;;
+Data type of generated values;Double;;;;;;;
+Matrix size;3;4;5;6;7;8;9;10
+Average time;2,80E-08;1,07E-06;7,67E-06;3,98E-06;5,00E-06;7,82E-06;1,13E-05;2,50E-05
+95% Confidence interval (lower limit);1,79E-08;1,03E-06;7,35E-06;3,30E-06;4,16E-06;6,17E-06;9,14E-06;1,69E-05
+95% Confidence interval (upper limit);3,81E-08;1,12E-06;7,98E-06;4,66E-06;5,83E-06;9,47E-06;1,34E-05;3,32E-05
