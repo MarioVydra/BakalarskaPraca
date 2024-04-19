@@ -14,11 +14,17 @@ private:
     std::ofstream outputFile_;      // atribút zodpovedný za prácu s výstupným súborom
 public:
     /**
-     * Konštruktor triedy.
+     * Default konštruktor triedy.
+     */
+    FileWriter() {};
+
+    /**
+     * Metódy setInputFile nastaví meno výstupného súboru a ofstream atribút.
      *
      * @param fileName meno výstupného súboru
      */
-    FileWriter(const std::string& fileName) : fileName_(fileName) {
+    void setOutputFile(const std::string& fileName) {
+        fileName_ = fileName;
         outputFile_ = std::ofstream(fileName_, std::ios_base::app);
     };
 
@@ -50,6 +56,13 @@ public:
         }
 
         outputFile_ << std::setprecision(std::numeric_limits<double>::max_digits10) << data;
+    }
+
+    /**
+     * Metóda closeFile zatvorí súbor.
+     */
+    void closeFile() {
+        outputFile_.close();
     }
 };
 

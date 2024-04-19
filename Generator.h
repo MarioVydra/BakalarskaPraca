@@ -27,7 +27,7 @@ public:
      * @param zeroProbability pravdepodobnosť vygenerovania 0
      * @param seed seed
      */
-    Generator(int minValue, int maxValue, double zeroProbability, unsigned int seed) : numberDistribution_(minValue, maxValue), zeroProbability_(zeroProbability), zeroDistribution_(0.0, 1.0), seed_(seed) {
+    Generator(double minValue, double maxValue, double zeroProbability, unsigned int seed) : numberDistribution_(minValue, maxValue), zeroProbability_(zeroProbability), zeroDistribution_(0.0, 1.0), seed_(seed) {
         numberGenerator_ = std::default_random_engine(seed_);
         zeroGenerator_ = std::default_random_engine(seed_);
     }
@@ -51,15 +51,6 @@ public:
             randomNumber = numberDistribution_(numberGenerator_);
         }
         return randomNumber;
-    }
-
-    /**
-     * Getter pre seed generátorov.
-     *
-     * @return seed
-     */
-    unsigned int getSeed() {
-        return seed_;
     }
 };
 
@@ -108,15 +99,6 @@ public:
             randomNumber = numberDistribution_(numberGenerator_);
         }
         return randomNumber;
-    }
-
-    /**
-     * Getter pre seed generátorov.
-     *
-     * @return seed
-     */
-    unsigned int getSeed() {
-        return seed_;
     }
 };
 

@@ -13,39 +13,18 @@ enum laplaceVariant { FULL_LAPLACE_EXPANSION, LAPLACE_RULE_OF_SARRUS };
 /**
  * Trieda Algorithms obsahuje jednotlivé algoritmy na výpočet determinantu štvorcových matíc.
  *
- * @tparam T dátový typ prvkov matice
  */
-template<class T>
 class Algorithms {
 public:
     /**
-     * Getter pre aktuálny systémový čas.
-     *
-     * @return aktuálny systémový čas
-     */
-    auto getCurrentTime() {
-        return std::chrono::system_clock::now();
-    }
-
-    /**
-     * Metóda outputResults slúži na výpis výsledného determinantu matice a čas trvania daného výpočtu.
-     *
-     * @param methodName názov metódy
-     * @param result výsledný determinant
-     * @param elapsedTime výsledný čas trvania výpočtu
-     */
-    void outputResults(const std::string& methodName, T result, auto elapsedTime) {
-        std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
-        std::cout << "Calculation duration of the " << methodName << ": " << elapsedTime << std::endl;
-    }
-
-    /**
      * Metóda gaussEliminationMethod reprezentuje algoritmus Gaussovej eliminácie na výpočet determinantu štvorcovej matice.
      *
+     * @tparam T dátový typ prvkov matice
      * @param matrix referencia na maticu
      * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
      * @return čas trvania výpočtu
      */
+    template <typename T>
     double gaussEliminationMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         std::vector<T> pivots;
@@ -107,10 +86,12 @@ public:
     /**
      * Metóda leibnizMethod reprezentuje algoritmus Leibnitzovej metódy na výpočet determinantu štvorcovej matice.
      *
+     * @tparam T dátový typ prvkov matice
      * @param matrix referencia na maticu
      * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
      * @return čas trvania výpočtu
      */
+    template <typename T>
     double leibnizMethod(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         T result = 0;
@@ -163,28 +144,14 @@ public:
     }
 
     /**
-     * Metóda ruleOfSarrus reprezentuje algoritmus Sarusovho pravidla na výpočet determinantu štvorcovej matice.
-     *
-     * @param matrix referencia na maticu
-     * @return hodnota determinantu
-     */
-    T ruleOfSarrus(Matrix<T>& matrix) {
-        T result = matrix[0][0] * matrix[1][1] * matrix[2][2]
-                 + matrix[0][1] * matrix[1][2] * matrix[2][0]
-                 + matrix[0][2] * matrix[1][0] * matrix[2][1]
-                 - matrix[0][2] * matrix[1][1] * matrix[2][0]
-                 - matrix[0][0] * matrix[1][2] * matrix[2][1]
-                 - matrix[0][1] * matrix[1][0] * matrix[2][2];
-        return result;
-    }
-
-    /**
      * Metóda luDecomposition reprezentuje algoritmus LU dekompozície na výpočet determinantu štvorcovej matice.
      *
+     * @tparam T dátový typ prvkov matice
      * @param matrix referencia na maticu
      * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
      * @return čas trvania výpočtu
      */
+    template <typename T>
     double luDecomposition(Matrix<T>& matrix, bool characterOutput) {
         auto start = getCurrentTime();
         int matrixSize = matrix.getSize();
@@ -211,7 +178,7 @@ public:
             // výpočet prvkov matice U
             for (int j = i; j < matrixSize; ++j) {
                 sum = 0;
-                for (int k = 0; k < matrixSize; ++k) {
+                for (int k = 0; k < i; ++k) {
                     sum += L[i][k] * U[k][j];
                 }
                 U[i][j] = matrix[i][j] - sum;
@@ -230,7 +197,7 @@ public:
                     L[i][i] = 1;
                 } else {
                     sum = 0;
-                    for (int k = 0; k < matrixSize; ++k) {
+                    for (int k = 0; k < i; ++k) {
                         sum += L[j][k] * U[k][i];
                     }
                     L[j][i] = (matrix[j][i] - sum) / U[i][i];
@@ -257,11 +224,13 @@ public:
     /**
      * Metóda laplaceMethod slúži na volanie algoritmu Laplaceovho rozvoja a zistenie dĺžky trvania algoritmu Laplaceovho rozvoja.
      *
+     * @tparam T dátový typ prvkov matice
      * @param matrix referencia na maticu
      * @param variant varianta laplaceovho rozvoja
      * @param characterOutput či sa majú vypísať výsledky do konzoly (boolean)
      * @return čas trvania výpočtu
      */
+    template <typename T>
     double laplaceMethod(Matrix<T>& matrix, laplaceVariant variant, bool characterOutput) {
         auto start = getCurrentTime();
         T result = laplaceExpansion(matrix, variant);
@@ -278,13 +247,34 @@ public:
         return elapsedTime.count();
     }
 
+private:
+    /**
+     * Metóda ruleOfSarrus reprezentuje algoritmus Sarusovho pravidla na výpočet determinantu štvorcovej matice.
+     *
+     * @tparam T dátový typ prvkov matice
+     * @param matrix referencia na maticu
+     * @return hodnota determinantu
+     */
+    template <typename T>
+    T ruleOfSarrus(Matrix<T>& matrix) {
+        T result = matrix[0][0] * matrix[1][1] * matrix[2][2]
+                   + matrix[0][1] * matrix[1][2] * matrix[2][0]
+                   + matrix[0][2] * matrix[1][0] * matrix[2][1]
+                   - matrix[0][2] * matrix[1][1] * matrix[2][0]
+                   - matrix[0][0] * matrix[1][2] * matrix[2][1]
+                   - matrix[0][1] * matrix[1][0] * matrix[2][2];
+        return result;
+    }
+
     /**
      * Metóda laplaceExpansion reprezentuje algoritmus Laplaceovho rozvoja na výpočet determinantu štvorcovej matice.
      *
+     * @tparam T dátový typ prvkov matice
      * @param matrix referencia na maticu
      * @param variant varianta laplaceovho rozvoja
      * @return hodnota determinantu
      */
+    template <typename T>
     T laplaceExpansion(Matrix<T>& matrix, laplaceVariant variant) {
         int matrixSize = matrix.getSize();
 
@@ -387,6 +377,29 @@ public:
             }
         }
         return result;
+    }
+
+    /**
+     * Getter pre aktuálny systémový čas.
+     *
+     * @return aktuálny systémový čas
+     */
+    auto getCurrentTime() {
+        return std::chrono::system_clock::now();
+    }
+
+    /**
+     * Metóda outputResults slúži na výpis výsledného determinantu matice a čas trvania daného výpočtu.
+     *
+     * @tparam T dátový typ prvkov matice
+     * @param methodName názov metódy
+     * @param result výsledný determinant
+     * @param elapsedTime výsledný čas trvania výpočtu
+     */
+    template <typename T>
+    void outputResults(const std::string& methodName, T result, auto elapsedTime) {
+        std::cout << "The determinant of the matrix is equal to: " << result << std::endl;
+        std::cout << "Calculation duration of the " << methodName << ": " << elapsedTime << std::endl;
     }
 };
 

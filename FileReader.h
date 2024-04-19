@@ -13,11 +13,17 @@ private:
     std::ifstream inputFile_;       // atribút zodpovedný za manipuláciu so vstupným súborom
 public:
     /**
-     * Konštruktor triedy.
+     * Default konštruktor triedy.
+     */
+    FileReader() {};
+
+    /**
+     * Metódy setInputFile nastaví meno vstupného súboru a ifstream atribút.
      *
      * @param fileName meno vstupného súboru
      */
-    FileReader(const std::string& fileName) : fileName_(fileName) {
+    void setInputFile(const std::string& fileName) {
+        fileName_ = fileName;
         inputFile_ = std::ifstream(fileName_);
     };
 
